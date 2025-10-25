@@ -23,6 +23,7 @@
       color: white;
       overflow-x: hidden;
       padding: 80px 15px;
+      display: none; /* 🔹 hide content until name is verified */
     }
 
     @keyframes gradientShift {
@@ -55,7 +56,6 @@
       color: #f9f9f9;
     }
 
-    /* Carousel section */
     .carousel {
       position: relative;
       width: 100%;
@@ -119,7 +119,6 @@
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
     }
 
-    /* Floating hearts */
     .heart {
       position: absolute;
       bottom: -10px;
@@ -134,27 +133,15 @@
       100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
     }
 
-    /* RESPONSIVENESS */
     @media (max-width: 768px) {
-      .ecard {
-        padding: 20px 15px;
-      }
-      .carousel {
-        height: 220px;
-      }
-      .controls button {
-        padding: 8px 14px;
-        font-size: 0.85rem;
-      }
+      .ecard { padding: 20px 15px; }
+      .carousel { height: 220px; }
+      .controls button { padding: 8px 14px; font-size: 0.85rem; }
     }
 
     @media (max-width: 480px) {
-      .carousel {
-        height: 180px;
-      }
-      .voice-btn {
-        padding: 10px 20px;
-      }
+      .carousel { height: 180px; }
+      .voice-btn { padding: 10px 20px; }
     }
   </style>
 </head>
@@ -165,9 +152,7 @@
       Every moment with you feels like a beautiful dream come true. 💙 You bring color to my world, laughter to my heart, and warmth to my soul. On this special day, I just want you to know that you’re my favorite person in the entire universe. 🌍 I’m so lucky to have you — my sunshine, my peace, my everything. 💫
     </p>
 
-    <!-- Image Carousel Section -->
     <div class="carousel" id="carousel">
-      <!-- 🔹 Replace these images with your own -->
       <img src="first-image.jpg" class="active">
       <img src="second-image.jpg">
       <img src="third-image.jpg">
@@ -178,7 +163,6 @@
       <button id="nextBtn">⏭️ Next</button>
     </div>
 
-    <!-- Voice Over Button -->
     <div>
       <button class="voice-btn" id="playVoice">▶️ Play Voice Message</button>
       <audio id="voiceAudio" src="birthday.mp3"></audio>
@@ -186,6 +170,16 @@
   </div>
 
   <script>
+    // 🔹 Ask for name before showing page
+    const name = prompt("What's your name baby girl 😂?");
+    if (name && name.trim().toLowerCase() === "precious") {
+      document.body.style.display = "flex"; // show the page
+    } else {
+      alert("Sorry, this page is only for her 💖");
+      document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:40vh;'>Access Denied 💔</h2>";
+      throw new Error("Access denied");
+    }
+
     // Carousel functionality
     const images = document.querySelectorAll('.carousel img');
     const prevBtn = document.getElementById('prevBtn');
