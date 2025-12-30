@@ -5,180 +5,153 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Happy Birthday My Love 💖</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
     body {
       min-height: 100vh;
       background: linear-gradient(135deg, royalblue, black, deeppink);
       background-size: 400% 400%;
       animation: gradientShift 10s ease infinite;
-      display: flex;
       justify-content: center;
       align-items: center;
       color: white;
       overflow-x: hidden;
       padding: 80px 15px;
-      display: none; /* 🔹 hide content until name is verified */
+      display: none; /* hidden until name is verified */
     }
-
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
+    @keyframes gradientShift { 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%} }
     .ecard {
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(255,255,255,0.12);
       border-radius: 20px;
       padding: 30px 25px;
-      width: min(90%, 700px);
+      width: min(90%,700px);
       text-align: center;
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 25px rgba(255,255,255,0.2);
       position: relative;
       overflow: hidden;
-    }
-
-    h1 {
-      font-size: clamp(1.5rem, 5vw, 2.2rem);
-      color: #ffe6f2;
-      margin-bottom: 15px;
-    }
-
-    p.message {
-      font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-      margin-bottom: 25px;
-      line-height: 1.6;
-      color: #f9f9f9;
-    }
-
-    .carousel {
-      position: relative;
-      width: 100%;
-      height: 250px;
-      overflow: hidden;
-      border-radius: 15px;
-      margin-bottom: 20px;
-    }
-
-    .carousel img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: none;
-      border-radius: 15px;
-      transition: opacity 0.5s ease;
-    }
-
-    .carousel img.active {
-      display: block;
-    }
-
-    .controls {
       display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 12px;
     }
-
-    .controls button {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-      font-size: 0.95rem;
-    }
-
-    .controls button:hover {
-      background-color: rgba(255, 255, 255, 0.4);
-    }
-
-    .voice-btn {
-      background: linear-gradient(90deg, royalblue, deeppink);
-      border: none;
-      padding: 12px 26px;
-      border-radius: 25px;
-      color: white;
-      cursor: pointer;
-      font-size: clamp(0.9rem, 3vw, 1rem);
-      font-weight: 500;
-      transition: transform 0.2s, box-shadow 0.3s;
-      margin: 25px auto 40px;
-      display: inline-block;
-    }
-
-    .voice-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-    }
-
-    .heart {
-      position: absolute;
-      bottom: -10px;
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 20px;
-      animation: floatUp 6s linear infinite;
-      user-select: none;
-    }
-
-    @keyframes floatUp {
-      0% { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
-    }
-
-    @media (max-width: 768px) {
-      .ecard { padding: 20px 15px; }
-      .carousel { height: 220px; }
-      .controls button { padding: 8px 14px; font-size: 0.85rem; }
-    }
-
-    @media (max-width: 480px) {
-      .carousel { height: 180px; }
-      .voice-btn { padding: 10px 20px; }
-    }
+    h1 { font-size: clamp(1.5rem,5vw,2.2rem); color:#ffe6f2; margin-bottom: 0; }
+    p.message { font-size: clamp(0.95rem,2.5vw,1.1rem); margin-bottom: 5px; line-height:1.6; color:#f9f9f9; }
+    .carousel { position: relative; width: 100%; height: 250px; overflow: hidden; border-radius: 15px; margin-bottom: 10px; }
+    .carousel img { width:100%; height:100%; object-fit:cover; display:none; border-radius:15px; transition:opacity .5s ease; }
+    .carousel img.active { display:block; }
+    .autoplay { display:flex; justify-content:center; gap:15px; flex-wrap:wrap; }
+    .autoplay button, .voice-btn { background-color: rgba(255,255,255,0.12); color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor:pointer; font-size: .95rem; }
+    .voice-btn { background: linear-gradient(90deg, royalblue, deeppink); padding: 12px 26px; border-radius: 25px; display:inline-block; font-weight:500; }
+    .voice-btn.hidden { display: none; }
+    .heart { position:absolute; bottom:-10px; color: rgba(255,255,255,0.7); font-size: 20px; animation: floatUp 6s linear infinite; }
+    @keyframes floatUp { 0%{transform:translateY(0) scale(1);opacity:1}100%{transform:translateY(-110vh) scale(1.5);opacity:0} }
+    @media (max-width: 768px) { .ecard { padding:20px 15px } .carousel{height:220px} .autoplay button{padding:8px 14px} }
+    @media (max-width:480px) { .carousel{height:180px} .voice-btn{padding:10px 20px} }
+    /* small helper for the fallback info */
+    .notice { font-size: .9rem; opacity: .9; margin-top: 6px; }
   </style>
 </head>
 <body>
-  <div class="ecard">
+  <div class="ecard" id="ecard">
     <h1>Happy Birthday, My Queen 💖</h1>
-    <p class="message">
-      Every moment with you feels like a beautiful dream come true. 💙 You bring color to my world, laughter to my heart, and warmth to my soul. On this special day, I just want you to know that you’re my favorite person in the entire universe. 🌍 I’m so lucky to have you — my sunshine, my peace, my everything. 💫
-    </p>
+    <div class="message-wrap">
+      <p class="message"><strong>Happy Birthday My Love — the Woman of My Dreams</strong></p>
+      <p class="message">Every moment with you feels like a beautiful dream. You bring color to my world, laughter to my heart, and warmth to my soul. I’m so lucky to have you — my sunshine, my peace, my everything.</p>
+    </div>
 
-    <div class="carousel" id="carousel">
+  <div class="carousel" id="carousel">
       <img src="first-image.jpg" class="active">
       <img src="second-image.jpg">
       <img src="third-image.jpg">
+      <img src="pic 1.jpeg">
+      <img src="pic 2.jpeg">
+      <img src="pic3.jpeg">
+      <img src="pic4.jpeg">
+      <img src="pic 5.jpeg">
+      <img src="pic6.jpeg">
+      <img src="pic7.jpeg">
+      <img src="a1.jpg">
+      <img src="a2.jpg">
+      <img src="a3.jpg">
+      <img src="a4.jpg">
+      <img src="a5.jpg">
+      <img src="a6.jpg">
     </div>
 
-    <div class="controls">
+    <div class="autoplay">
       <button id="prevBtn">⏮️ Prev</button>
       <button id="nextBtn">⏭️ Next</button>
     </div>
 
     <div>
-      <button class="voice-btn" id="playVoice">▶️ Play Voice Message</button>
-      <audio id="voiceAudio" src="birthday.mp3"></audio>
+      <!-- remove autoplay attribute; preload and playsinline help -->
+      <audio id="voiceAudio" src="by-now.mp3" preload="auto" playsinline></audio>
+      <button class="voice-btn hidden" id="playVoice">▶️ Play Voice Message</button>
+      <div class="notice" id="notice" aria-live="polite"></div>
     </div>
   </div>
 
   <script>
-    // 🔹 Ask for name before showing page
-    const name = prompt("What's your name baby girl 😂?");
-    if (name && name.trim().toLowerCase() === "precious") {
-      document.body.style.display = "flex"; // show the page
+    // short friendly prompt first
+    alert("Many things I want to say to you but words always fail me when I need them the most.");
+
+    // Prompt user — calling play right after prompt gives the best chance browsers accept it.
+    // const name = prompt("Many things i want to say to u buh. but i don't know how to put them together in words lol, words always fail me when i need them the most ")
+  const name = prompt("Hey mama, it's me your admirer happy birthday to you on this special day, A day an amazing woman was born into this world. A queen came to exist. i want to use tis sopportunity to say thank you for being in my life, thank u for being my friend, best friend and confidant. happy birthday mama. enter mine to proceed ");
+
+    const voiceAudio = document.getElementById('voiceAudio');
+    const playVoiceBtn = document.getElementById('playVoice');
+    const notice = document.getElementById('notice');
+    const ecard = document.getElementById('ecard');
+
+    // helper to show the UI when access allowed
+    function showEcard() {
+      document.body.style.display = 'flex';
+      ecard.style.opacity = '1';
+    }
+
+    // fallback UI if autoplay blocked
+    function showPlayFallback() {
+      playVoiceBtn.classList.remove('hidden');
+      notice.textContent = "If you don't hear audio automatically, please tap ▶️ Play Voice Message.";
+    }
+
+    // Try to play the audio immediately (best chance because it's directly after prompt)
+    async function tryPlayImmediately() {
+      try {
+        voiceAudio.currentTime = 0;
+        voiceAudio.volume = 1;
+        await voiceAudio.play();
+        // played successfully
+        notice.textContent = "Playing message — enjoy!";
+      } catch (err) {
+        // Autoplay blocked — show fallback play button
+        console.warn("Autoplay blocked or failed:", err);
+        showPlayFallback();
+      }
+    }
+
+    // logic for verifying the name: accepts 'mine' (case-insensitive)
+    if (name && name.trim().toLowerCase() === 'mine') {
+      showEcard();
+      // attempt immediate playback
+      tryPlayImmediately();
     } else {
-      alert("Sorry, this page is only for her 💖");
+      alert("Short term memory wants to see her cute face — hope you're seeing this in the morning! I call you 'mine' just in case you forgot 💖");
+      // show an Access Denied message visually
       document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:40vh;'>Access Denied 💔</h2>";
       throw new Error("Access denied");
     }
+
+    // Play button fallback — clicking it counts as a user gesture so playback will work
+    playVoiceBtn.addEventListener('click', async () => {
+      try {
+        await voiceAudio.play();
+        playVoiceBtn.classList.add('hidden');
+        notice.textContent = "Playing — enjoy!";
+      } catch (err) {
+        notice.textContent = "Playback failed. Try tapping the audio control in your browser.";
+        console.error("Play button failed:", err);
+      }
+    });
 
     // Carousel functionality
     const images = document.querySelectorAll('.carousel img');
@@ -195,29 +168,27 @@
       index = (index - 1 + images.length) % images.length;
       showImage(index);
     });
-
     nextBtn.addEventListener('click', () => {
       index = (index + 1) % images.length;
       showImage(index);
     });
 
-    // Voice button
-    const playVoice = document.getElementById('playVoice');
-    const voiceAudio = document.getElementById('voiceAudio');
-    playVoice.addEventListener('click', () => {
-      voiceAudio.play();
-    });
+    // auto slide every 3s
+    setInterval(() => {
+      index = (index + 1) % images.length;
+      showImage(index);
+    }, 3000);
 
-    // Floating colorful hearts
+    // Floating hearts
     function createHeart() {
       const heart = document.createElement('div');
       heart.classList.add('heart');
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.color = ['#ff69b4', '#00bfff', '#fff', '#ff1493'][Math.floor(Math.random() * 4)];
-      heart.textContent = '❤';
-      heart.style.animationDuration = (3 + Math.random() * 5) + 's';
+      heart.style.left = Math.random() * 90 + 'vw';
+      heart.style.color = ['#ff69b4','#00bfff','#fff','#ff1493'][Math.floor(Math.random()*4)];
+      heart.textContent = 'happy birthday mama ❤️';
+      heart.style.animationDuration = (3 + Math.random()*5) + 's';
       document.body.appendChild(heart);
-      setTimeout(() => { heart.remove(); }, 8000);
+      setTimeout(() => heart.remove(), 8000);
     }
     setInterval(createHeart, 400);
   </script>
